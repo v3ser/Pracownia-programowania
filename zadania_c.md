@@ -393,6 +393,239 @@ int my_sqrt(int n) {
     return ans;
 }
 ```
+## Zadanie 2.2.9
+```c
+#include <stdio.h>
+
+int mth_root(int m, int n) {
+    if (n == 0) return 0;
+    int low = 0, high = n, best = 0;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        long long val = 1;
+        for (int i = 0; i < m; i++) {
+            val *= mid;
+            if (val > n) break;
+        }
+        if (val == n) return mid;
+        if (val < n) {
+            best = mid;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return best;
+}
+```
+## Zadanie 2.2.10
+```c
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int sum_coprimes(int n) {
+    int sum = 0;
+    for (int i = 1; i < n; i++) {
+        if (gcd(i, n) == 1) sum += i;
+    }
+    return sum;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", sum_coprimes(n));
+    return 0;
+}
+```
+## Zadanie 2.2.11
+```c
+#include <stdio.h>
+#include <math.h>
+
+int floor_root(int k, int m) {
+    if (k == 0) return 0;
+    int low = 0, high = k, best = 0;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        long long val = 1;
+        for (int i = 0; i < m; i++) {
+            val *= mid;
+            if (val > k) break;
+        }
+        if (val == k) return mid;
+        if (val < k) {
+            best = mid;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return best;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int sum = 0;
+    int limit = (int)sqrt(n);
+    for (int k = 0; k <= limit; k++) {
+        sum += floor_root(k, n);
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+```
+## Zadanie 2.2.12
+```c
+#include <stdio.h>
+
+int floor_mth_root(int k, int m) {
+    // Implementacja jak w 2.2.9
+}
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    int sum = 0;
+    for (int k = 0; k <= n; k++) {
+        sum += mth_root(m, k);
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+```
+## Zadanie 2.2.13a
+```c
+#include <stdio.h>
+#include <math.h>
+
+void print_sum_of_squares(int n) {
+    for (int a = 1; a*a <= n; a++) {
+        int b_sq = n - a*a;
+        int b = (int)sqrt(b_sq);
+        if (b*b == b_sq && b > 0) {
+            printf("%d^2 + %d^2\n", a, b);
+        }
+    }
+}
+```
+## Zadanie 2.2.13b
+```c
+void print_sum_of_squares_unique(int n) {
+    for (int a = 1; a*a <= n/2; a++) {
+        int b_sq = n - a*a;
+        int b = (int)sqrt(b_sq);
+        if (b*b == b_sq && b >= a) {
+            printf("%d^2 + %d^2\n", a, b);
+        }
+    }
+}
+```
+## Zadanie 2.2.17
+```c
+#include <stdio.h>
+
+void count_calls() {
+    static int counter = 0;
+    printf("Liczba wywołań: %d\n", ++counter);
+}
+```
+## Zadanie 2.2.18
+```c
+#include <stdio.h>
+
+double pseudo_random() {
+    static double x = 0.5; // Początkowa wartość
+    double result = x;
+    x = 1 - x * x;
+    return result;
+}
+```
+## Zadanie 2.2.19
+```c
+#include <stdio.h>
+
+int read_and_sum() {
+    static int total = 0;
+    int num;
+    scanf("%d", &num);
+    total += num;
+    printf("Aktualna suma: %d\n", total);
+    return num;
+}
+```
+## Zadanie 2.2.20 (silnia rekurencyjnie)
+```c
+unsigned long long factorial_rec(int n) {
+    if (n == 0) return 1;
+    return n * factorial_rec(n - 1);
+}
+```
+## Zadanie 2.2.21
+```c
+int sequence_2_21(int n) {
+    if (n == 0) return 1;
+    return 2 * sequence_2_21(n - 1) + 5;
+}
+```
+## Zadanie 2.2.22
+```c
+int sequence_2_22(int n) {
+    if (n == 0 || n == 1) return 1;
+    return sequence_2_22(n - 1) + 2 * sequence_2_22(n - 2) + 3;
+}
+```
+## Zadanie 2.2.23 (Fibonacciego rekurencyjnie)
+```c
+int fib(int n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+```
+## Zadanie 2.2.24
+```c
+int sequence_2_24(int n) {
+    if (n == 0 || n == 1) return 1;
+    int sum = 0;
+    for (int i = 0; i < n; i++) sum += sequence_2_24(i);
+    return sum;
+}
+```
+## Zadanie 2.2.25 (przy założeniu braku danych - przykład ogólny)
+```c
+int sequence_2_25(int n) {
+    if (n == 0 || n == 1) return 1;
+    // Brak pełnej definicji - przykładowa implementacja
+    return sequence_2_25(n - 1) + sequence_2_25(n - 2);
+}
+```
+## Przykładowe main() do testowania
+```c
+int main() {
+    // Test 2.2.17
+    count_calls();
+    count_calls();
+
+    // Test 2.2.18
+    printf("%f\n", pseudo_random());
+    printf("%f\n", pseudo_random());
+
+    // Test 2.2.20
+    printf("%llu\n", factorial_rec(5));
+
+    return 0;
+}
+```
 ## 3.2.1 – Zwracanie mniejszej wartości
 
 ```c
