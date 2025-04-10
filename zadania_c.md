@@ -1,6 +1,285 @@
 
-# Zadania z języka C – wskaźniki, tablice, funkcje
+# Zadania z języka C 
 
+## Zadanie 1.4.1
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    for (int i = n; i < m; i += n) {
+        printf("%d\n", i);
+    }
+    return 0;
+}
+```
+## Zadanie 1.4.2
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    for (int i = 1; i <= m; ++i) {
+        printf("%d\n", n * i);
+    }
+    return 0;
+}
+```
+## Zadanie 1.4.3
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m, k;
+    scanf("%d %d %d", &n, &m, &k);
+    int start = m + (n - m % n) % n; // Pierwsza wielokrotność większa od m
+    for (int i = start; i < k; i += n) {
+        printf("%d\n", i);
+    }
+    return 0;
+}
+```
+## Zadanie 1.4.4
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    unsigned long long factorial = 1;
+    scanf("%d", &n);
+    for (int i = 2; i <= n; ++i) {
+        factorial *= i;
+    }
+    printf("%llu\n", (n == 0) ? 1 : factorial);
+    return 0;
+}
+```
+## Zadanie 1.4.5
+```c
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0;
+    scanf("%d", &n);
+    for (int i = 0; i <= n; ++i) {
+        sum += i * i;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+```
+## Zadanie 1.4.6
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    long product = 1;
+    scanf("%d", &n);
+    for (int i = 2; i <= n; i += 2) {
+        product *= i;
+    }
+    printf("%ld\n", product);
+    return 0;
+}
+```
+## Zadanie 1.4.7
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m;
+    long product = 1;
+    scanf("%d %d", &n, &m);
+    for (int i = n; i <= m; ++i) {
+        product *= i;
+    }
+    printf("%ld\n", product);
+    return 0;
+}
+```
+## Zadanie 1.4.8
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    long long a = 0, b = 1, temp;
+    if (n == 0) {
+        printf("0\n");
+        return 0;
+    }
+    for (int i = 2; i <= n; ++i) {
+        temp = b;
+        b += a;
+        a = temp;
+    }
+    printf("%lld\n", b);
+    return 0;
+}
+```
+## Zadanie 1.4.9 (NWD)
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    while (m != 0) {
+        int temp = m;
+        m = n % m;
+        n = temp;
+    }
+    printf("%d\n", n);
+    return 0;
+}
+```
+## Zadanie 1.4.10
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", (int)sqrt(n));
+    return 0;
+}
+```
+## Zadanie 1.4.11a
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int a, b, c, d;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+    int x = 0;
+    while (1) {
+        int current = abs(a) * x * x + b * x + c;
+        if (current > d) {
+            printf("%d\n", x);
+            break;
+        }
+        // Obsługa przypadków bez rozwiązania
+        if (a == 0) {
+            if (b == 0) {
+                if (c <= d) {
+                    printf("-1\n");
+                    break;
+                }
+            } else if (b < 0) {
+                if (current <= d) {
+                    printf("-1\n");
+                    break;
+                }
+            }
+        }
+        x++;
+    }
+    return 0;
+}
+```
+## Zadanie 1.4.11b
+```c
+#include <stdio.h>
+
+int main() {
+    int a, b, c;
+    scanf("%d %d %d", &a, &b, &c);
+    int x = 0, last_valid = -1;
+    while (1) {
+        int current = 5 * x * x + a * x + b;
+        if (current < c) {
+            last_valid = x;
+            x++;
+        } else break;
+    }
+    printf("%d\n", last_valid);
+    return 0;
+}
+```
+## Zadanie 1.4.11c
+```c
+#include <stdio.h>
+
+int main() {
+    int a, b, c;
+    scanf("%d %d %d", &a, &b, &c);
+    int x = 0, last_valid = -1;
+    while (1) {
+        int current = 5 * x * x + a * x + b;
+        if (current <= c) {
+            last_valid = x;
+            x++;
+        } else break;
+    }
+    printf("%d\n", last_valid);
+    return 0;
+}
+```
+## Zadanie 1.4.12
+```c
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int main() {
+    int n, sum = 0;
+    scanf("%d", &n);
+    for (int k = 1; k < n; k++) {
+        if (gcd(k, n) == 1) sum += k;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+```
+## Zadanie 1.4.13
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    unsigned long long sum = 1, fact = 1;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        fact *= i;
+        sum += fact;
+    }
+    printf("%llu\n", sum);
+    return 0;
+}
+```
+## Zadanie 1.4.14
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    for (int a = 1; a < n; a++) {
+        for (int b = a; b < n; b++) {
+            int c_sq = a * a + b * b;
+            int c = (int)sqrt(c_sq);
+            if (c * c == c_sq && c < n) {
+                printf("%d %d %d\n", a, b, c);
+            }
+        }
+    }
+    return 0;
+}
+```
 ## 3.2.1 – Zwracanie mniejszej wartości
 
 ```c
