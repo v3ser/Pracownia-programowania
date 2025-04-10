@@ -280,6 +280,119 @@ int main() {
     return 0;
 }
 ```
+## Zadanie 2.2.1
+```c
+#include <stdio.h>
+
+int my_abs(int n) {
+    return (n < 0) ? -n : n;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", my_abs(n));
+    return 0;
+}
+```
+## Zadanie 2.2.2
+```c
+#include <stdio.h>
+
+unsigned long long my_factorial(int n) {
+    if (n == 0) return 1;
+    unsigned long long result = 1;
+    for (int i = 1; i <= n; i++) result *= i;
+    return result;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%llu\n", my_factorial(n));
+    return 0;
+}
+```
+## Zadanie 2.2.3
+```c
+#include <stdio.h>
+
+int find_largest_divisor(int n) {
+    for (int k = n-1; k >= 1; k--) {
+        if (n % k == 0) return k;
+    }
+    return 1; // Dla n=1 (ale n > 2 w zadaniu)
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n <= 2) return 1; // Zgodnie z warunkiem n > 2
+    printf("%d\n", find_largest_divisor(n));
+    return 0;
+}
+```
+## Zadanie 2.2.4
+```c
+int power_of_two(unsigned int n) {
+    if (n == 0) return 1;
+    int result = 1;
+    for (int i = 0; i < n; i++) result *= 2;
+    return result;
+}
+```
+## Zadanie 2.2.5
+```c
+int power_of_two_signed(int n) {
+    if (n < 0) return 0; // Dla ujemnych zwracamy 0
+    int result = 1;
+    for (int i = 0; i < n; i++) result *= 2;
+    return result;
+}
+```
+## Zadanie 2.2.6
+```c
+int custom_pow(unsigned int n, unsigned int m) {
+    if (n == 0 && m == 0) return -1; // Niezdefiniowane
+    if (n == 0) return 0;
+    if (m == 0) return 1;
+    
+    int result = 1;
+    for (int i = 0; i < m; i++) result *= n;
+    return result;
+}
+```
+## Zadanie 2.2.7
+```c
+int custom_pow_signed(int n, int m) {
+    if (m < 0) return 0; // Nie obsługujemy ujemnych wykładników
+    if (n == 0 && m == 0) return -1;
+    if (n == 0) return 0;
+    if (m == 0) return 1;
+    
+    int result = 1;
+    for (int i = 0; i < m; i++) result *= n;
+    return result;
+}
+```
+## Zadanie 2.2.8
+```c
+int my_sqrt(int n) {
+    if (n == 0 || n == 1) return n;
+    int low = 0, high = n, mid, ans;
+    while (low <= high) {
+        mid = (low + high) / 2;
+        if (mid * mid == n) return mid;
+        if (mid * mid < n) {
+            low = mid + 1;
+            ans = mid;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return ans;
+}
+```
 ## 3.2.1 – Zwracanie mniejszej wartości
 
 ```c
